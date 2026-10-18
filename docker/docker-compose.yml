@@ -1,0 +1,24 @@
+services:
+  doorbell:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: doorbell-device
+    restart: unless-stopped
+    ports:
+      # SIP signaling
+      - "5060:5060/udp"
+      - "5060:5060/tcp"
+      # RTP media (audio + video)
+      - "10000-10100:10000-10100/udp"
+    volumes:
+      # Live-edit configs without rebuilding
+      - ../configs:/etc/asterisk
+      - ../sounds:/var/lib/asterisk/sounds
+      # Persist recordings + voicemail + logs
+      - doorbell-spool:/var/spool/asterisk
+      - doorbell-logs:/var/log/asterisk
+
+volumes:
+  doorbell-spool:
+  doorbell-logs:

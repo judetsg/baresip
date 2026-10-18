@@ -1,0 +1,17 @@
+# Generated / runtime artifacts (never commit these)
+*.log
+*.tmp
+*.swp
+*~
+
+# Call recordings, voicemail and CDR exports copied out of the container
+recordings/
+monitor/
+voicemail/
+cdr/
+*.gsm.wav
+
+# Editor / OS junk
+.DS_Store
+.idea/
+.vscode/
